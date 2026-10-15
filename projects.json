@@ -5,7 +5,7 @@
     "technologies": ["HTML", "CSS", "JavaScript"],
     "role": "Sole developer: design, logic and testing",
     "screenshot": "project1.png",
-    "link": "https://github.com/yourusername/grade-calculator"
+    "link": "grade-calculator/index.html"
   },
   {
     "title": "Weather Dashboard",
@@ -13,7 +13,7 @@
     "technologies": ["JavaScript", "REST API", "JSON"],
     "role": "Built the API integration and the responsive layout",
     "screenshot": "project2.png",
-    "link": "https://github.com/yourusername/weather-dashboard"
+    "link": "weather-dashboard/index.html"
   },
   {
     "title": "Student Task Tracker",
@@ -21,6 +21,6 @@
     "technologies": ["HTML", "CSS", "JavaScript"],
     "role": "Team of 3: I wrote the task storage and filtering",
     "screenshot": "project3.png",
-    "link": "https://github.com/yourusername/task-tracker"
+    "link": "task-tracker/index.html"
   }
 ]
