@@ -1,6 +1,6 @@
 "use strict";
 
-const GITHUB_USERNAME = "yourusername"; // <- change this
+const GITHUB_USERNAME = "yourusername"; // <- change this to your GitHub username
 
 /* ---------- Helper: build an element safely ---------- */
 function el(tag, props = {}, children = []) {
@@ -9,13 +9,26 @@ function el(tag, props = {}, children = []) {
   return node;
 }
 
+/* ---------- Fetch JSON, trying several possible locations ---------- */
+async function fetchFirst(paths) {
+  let lastError;
+  for (const path of paths) {
+    try {
+      const res = await fetch(path);
+      if (res.ok) return await res.json();
+      lastError = new Error("HTTP " + res.status + " for " + path);
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  throw lastError;
+}
+
 /* ---------- Projects from JSON ---------- */
 async function loadProjects() {
   const list = document.getElementById("project-list");
   try {
-    const res = await fetch("data/projects.json");
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const projects = await res.json();
+    const projects = await fetchFirst(["projects.json", "data/projects.json"]);
     list.replaceChildren(...projects.map(buildCard));
   } catch (err) {
     console.warn("Projects failed to load:", err);
@@ -28,11 +41,19 @@ async function loadProjects() {
 
 function buildCard(p) {
   const img = el("img", {
-    src: "images/" + p.screenshot,
+    src: p.screenshot,
     alt: "Screenshot of " + p.title,
     loading: "lazy"
   });
-  img.addEventListener("error", () => img.remove());
+  let triedImagesFolder = false;
+  img.addEventListener("error", () => {
+    if (!triedImagesFolder) {
+      triedImagesFolder = true;
+      img.src = "images/" + p.screenshot;
+    } else {
+      img.remove();
+    }
+  });
 
   const chips = el("ul", { className: "chips" },
     p.technologies.map(t => el("li", { textContent: t })));
@@ -43,7 +64,7 @@ function buildCard(p) {
     el("p", { className: "role", textContent: "Role: " + p.role }),
     chips,
     el("a", { className: "card-link", href: p.link, target: "_blank",
-              rel: "noopener", textContent: "View on GitHub" })
+              rel: "noopener", textContent: "Open project" })
   ]);
 
   return el("article", { className: "card" }, [img, body]);
