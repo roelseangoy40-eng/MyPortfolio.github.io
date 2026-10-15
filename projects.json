@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Grade Calculator",
+    "description": "A web app that computes weighted grades and shows the score needed on the final exam.",
+    "technologies": ["HTML", "CSS", "JavaScript"],
+    "role": "Sole developer: design, logic and testing",
+    "screenshot": "project1.png",
+    "link": "https://github.com/yourusername/grade-calculator"
+  },
+  {
+    "title": "Weather Dashboard",
+    "description": "Shows current weather and a 5-day forecast for any city using a public weather API.",
+    "technologies": ["JavaScript", "REST API", "JSON"],
+    "role": "Built the API integration and the responsive layout",
+    "screenshot": "project2.png",
+    "link": "https://github.com/yourusername/weather-dashboard"
+  },
+  {
+    "title": "Student Task Tracker",
+    "description": "A to-do list with categories and due dates. Tasks stay saved in the browser.",
+    "technologies": ["HTML", "CSS", "JavaScript"],
+    "role": "Team of 3: I wrote the task storage and filtering",
+    "screenshot": "project3.png",
+    "link": "https://github.com/yourusername/task-tracker"
+  }
+]
